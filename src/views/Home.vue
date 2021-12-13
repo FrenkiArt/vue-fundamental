@@ -4,7 +4,7 @@
 
     <PostForm @createPost="createPost" />
 
-    <Posts :posts="posts" />
+    <Posts :posts="posts" @removePost="removePost" />
 
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
@@ -24,10 +24,10 @@ export default {
   data() {
     return {
       posts: [
-        {id: 1, title: 'title 1', body: 'Description 1'},
+        /* {id: 1, title: 'title 1', body: 'Description 1'},
         {id: 2, title: 'title 2', body: 'Description 2'},
         {id: 3, title: 'title 3', body: 'Description 3'},
-        {id: 3, title: 'title 4', body: 'Description 4'},
+        {id: 4, title: 'title 4', body: 'Description 4'}, */
       ],
     };
   },
@@ -35,6 +35,10 @@ export default {
   methods: {
     createPost(post) {
       this.posts.push(post);
+    },
+
+    removePost(post) {
+      this.posts = this.posts.filter((item) => item.id !== post.id);
     },
   },
 

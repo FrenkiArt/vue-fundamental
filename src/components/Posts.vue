@@ -1,13 +1,21 @@
 <template>
-  <div class="posts">
-    <Post v-for="post in posts" :key="post.id" :post="post" />
+  <div class="posts" v-show="posts.length > 0">
+    <Post
+      v-for="post in posts"
+      :key="post.id"
+      :post="post"
+      @removePost="$emit('removePost', post)"
+    />
   </div>
+
+  <h3 v-if="posts.length === 0">Список постов пуст</h3>
 </template>
 
 <script>
 import Post from './Post.vue';
 export default {
   name: 'posts',
+  emits: ['removePost'],
   data() {
     return {};
   },

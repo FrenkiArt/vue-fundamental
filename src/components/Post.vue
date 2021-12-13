@@ -4,7 +4,9 @@
     <div><strong>Описание:</strong> {{ post.body }}</div>
 
     <div class="post__btns">
-      <Button class="btn-remove-post"> Удалить </Button>
+      <MyButton class="btn-remove-post" @click="$emit('removePost', post)">
+        Удалить
+      </MyButton>
     </div>
   </div>
 </template>
@@ -12,6 +14,7 @@
 <script>
 export default {
   name: 'Post',
+  emits: ['removePost'],
   data() {
     return {};
   },

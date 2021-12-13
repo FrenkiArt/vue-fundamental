@@ -1,26 +1,22 @@
 <template>
   <form class="form-1" @submit.prevent="createPost">
     <h4>Создание поста</h4>
-    <input
+    <MyInput
       v-model="post.title"
-      type="text"
       name="inputTitle"
       placeholder="Название поста"
     />
-    <input
-      v-model="post.body"
-      name="inputBody"
-      type="text"
-      placeholder="Тело поста"
-    />
 
-    <Button type="submit" class="added-class"> Создать пост </Button>
+    <MyInput v-model="post.body" name="inputBody" placeholder="Тело поста" />
+
+    <MyButton type="submit" class="added-class"> Создать пост </MyButton>
   </form>
 </template>
 
 <script>
 export default {
   name: 'PostForm',
+  emits: ['createPost'],
   data() {
     return {
       post: {
@@ -50,11 +46,5 @@ export default {
   margin: 0 auto 15px;
   padding: 10px;
   border: 1px solid green;
-
-  input {
-    display: block;
-    width: 100%;
-    margin: 0 auto 5px;
-  }
 }
 </style>

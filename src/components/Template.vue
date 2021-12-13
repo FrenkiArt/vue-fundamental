@@ -3,6 +3,9 @@
 <script>
 export default {
   name: 'Template',
+  components: {},
+  props: {},
+  emits: [],
   data() {
     return {};
   },
