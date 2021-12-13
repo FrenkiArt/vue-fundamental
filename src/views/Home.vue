@@ -2,7 +2,13 @@
   <div class="home">
     <Likes />
 
-    <PostForm @createPost="createPost" />
+    <p>
+      <MyButton @click="showDialogVisible">Добавить пост</MyButton>
+    </p>
+
+    <BaseDialog v-model:show="dialogVisible">
+      <PostForm @createPost="createPost" />
+    </BaseDialog>
 
     <Posts :posts="posts" @removePost="removePost" />
 
@@ -29,16 +35,30 @@ export default {
         {id: 3, title: 'title 3', body: 'Description 3'},
         {id: 4, title: 'title 4', body: 'Description 4'}, */
       ],
+      dialogVisible: false,
     };
   },
 
   methods: {
     createPost(post) {
       this.posts.push(post);
+      this.hideDialogVisible();
     },
 
     removePost(post) {
       this.posts = this.posts.filter((item) => item.id !== post.id);
+    },
+
+    toggleDialogVisible() {
+      this.dialogVisible = !this.dialogVisible;
+    },
+
+    hideDialogVisible() {
+      this.dialogVisible = false;
+    },
+
+    showDialogVisible() {
+      this.dialogVisible = true;
     },
   },
 

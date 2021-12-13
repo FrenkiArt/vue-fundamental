@@ -43,7 +43,6 @@ export default {
 .form-1 {
   display: block;
   max-width: 320px;
-  margin: 0 auto 15px;
   padding: 10px;
   border: 1px solid green;
 }
