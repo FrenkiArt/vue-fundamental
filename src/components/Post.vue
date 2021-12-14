@@ -28,7 +28,8 @@ export default {
 
 <style lang="scss">
 .post {
-  padding: 15px;
+  width: 100%;
+  padding: 35px 15px 15px;
   border: 1px solid green;
   margin: 0 auto 15px;
   position: relative;
