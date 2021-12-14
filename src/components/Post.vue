@@ -5,6 +5,7 @@
     <div><strong>Описание:</strong> {{ post.body }}</div>
 
     <div class="post__btns">
+      <MyButton class="btn-open-post" @click="openPost"> Открыть </MyButton>
       <MyButton class="btn-remove-post" @click="$emit('removePost', post)">
         Удалить
       </MyButton>
@@ -22,7 +23,11 @@ export default {
   props: {
     post: Object,
   },
-  methods: {},
+  methods: {
+    openPost() {
+      this.$router.push(`/posts/${this.post.id}`);
+    },
+  },
   components: {},
 };
 </script>
