@@ -1,5 +1,25 @@
 <template>
   <div class="posts-page">
+    <h1>
+      {{
+        $store.state.isAuth
+          ? 'Пользователь авторизован'
+          : 'Неавторизованный доступ. Авторизуйтесь!'
+      }}
+    </h1>
+
+    <p>
+      <Likes />
+    </p>
+
+    <h1>{{ $store.state.likes }}</h1>
+    <h1>{{ $store.getters.doubleLikes }}</h1>
+
+    <p>
+      <MyButton @click="$store.commit('incrementLikes')">Лайк +</MyButton>
+      <MyButton @click="$store.commit('decrementLikes')">Лайк -</MyButton>
+    </p>
+
     <p><MyInput v-focus v-model="searchQuery" placeholder="Поиск..." /></p>
 
     <p>
@@ -46,10 +66,12 @@
 import Posts from '../components/Posts.vue';
 import PostForm from '../components/PostForm.vue';
 import axios from 'axios';
+import Likes from '../components/Likes.vue';
+import MyButton from '../components/ui/MyButton.vue';
 
 export default {
-  name: 'PostsPage',
-  components: {Posts, PostForm},
+  name: 'PostsPageWithStore',
+  components: {Posts, PostForm, Likes, MyButton},
   props: {},
   emits: [],
   data() {

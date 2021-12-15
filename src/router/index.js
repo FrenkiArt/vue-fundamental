@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router';
 import Home from '../views/Home.vue';
 import PostsPage from '../views/PostsPage.vue';
 import PostPage from '../views/PostPage.vue';
+import PostsPageWithStore from '@/views/PostsPageWithStore.vue';
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     path: '/posts',
     name: 'PostsPage',
     component: PostsPage,
+  },
+  {
+    path: '/postspagewithstore',
+    name: 'PostsPageWithStore',
+    component: PostsPageWithStore,
   },
   {
     path: '/posts/:id',
