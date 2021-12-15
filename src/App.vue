@@ -3,7 +3,8 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/posts">Posts</router-link> |
-    <router-link to="/postspagewithstore">PostsPageWithStore</router-link>
+    <router-link to="/postspagewithstore">PostsPageWithStore</router-link> |
+    <router-link to="/compositionapi">compositionapi</router-link>
   </div>
   <router-view />
 </template>

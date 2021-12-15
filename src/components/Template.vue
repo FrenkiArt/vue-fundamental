@@ -6,6 +6,7 @@ export default {
   components: {},
   props: {},
   emits: [],
+  setup(props) {},
   data() {
     return {};
   },
