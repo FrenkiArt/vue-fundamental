@@ -9,23 +9,20 @@
 </template>
 
 <script>
+import toggleMixin from '@/mixins/toggleMixin';
+
 export default {
   name: 'BaseDialog',
+  mixins: [toggleMixin],
   components: {},
-  props: {
-    show: {
-      type: Boolean,
-      default: false,
-    },
-  },
+  props: {},
   emits: ['update:show'],
   data() {
     return {};
   },
-  methods: {
-    hideDialog() {
-      this.$emit('update:show', false);
-    },
+  methods: {},
+  mounted() {
+    console.log('BaseDialog отработал.');
   },
 };
 </script>
