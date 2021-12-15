@@ -1,6 +1,6 @@
 <template>
   <div class="posts-page">
-    <p><MyInput v-model="searchQuery" placeholder="Поиск..." /></p>
+    <p><MyInput v-focus v-model="searchQuery" placeholder="Поиск..." /></p>
 
     <p>
       <BaseSelect v-model="selectedSort" :options="sortOptions" />
@@ -21,6 +21,10 @@
     />
 
     <div v-else>Идёт загрузка ...</div>
+
+    <div class="observer" v-intersection="funcObserve">
+      <h3>observer</h3>
+    </div>
 
     <div class="page__wrapper">
       <div
@@ -168,6 +172,10 @@ export default {
       this.page = pageNumber;
       /* this.fetchPosts(); */
     },
+
+    funcObserve() {
+      console.log('funcObserve сработал');
+    },
   },
 };
 </script>
@@ -193,5 +201,11 @@ export default {
   &.current {
     border: 2px solid red;
   }
+}
+
+.observer {
+  background-color: #cecece;
+  min-height: 1px;
+  width: 100%;
 }
 </style>
