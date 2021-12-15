@@ -1,6 +1,10 @@
 <template>
   <div class="posts-page">
     <h1>
+      {{ $store.state.post.limit }}
+    </h1>
+
+    <h1>
       {{
         $store.state.isAuth
           ? 'Пользователь авторизован'
@@ -20,10 +24,26 @@
       <MyButton @click="$store.commit('decrementLikes')">Лайк -</MyButton>
     </p>
 
-    <p><MyInput v-focus v-model="searchQuery" placeholder="Поиск..." /></p>
+    <!-- <p><MyInput v-focus v-model="searchQuery" placeholder="Поиск..." /></p> -->
+    <p>
+      <MyInput
+        v-focus
+        :model-value="searchQuery"
+        @update:model-value="setSearchQuery"
+        placeholder="Поиск..."
+      />
+    </p>
+
+    <!-- <p>
+      <BaseSelect v-model="selectedSort" :options="sortOptions" />
+    </p> -->
 
     <p>
-      <BaseSelect v-model="selectedSort" :options="sortOptions" />
+      <BaseSelect
+        :model-value="selectedSort"
+        @update:model-value="setSelectedSort"
+        :options="sortOptions"
+      />
     </p>
 
     <p>
@@ -54,7 +74,7 @@
         :class="{
           current: this.page === pageNumber ? true : false,
         }"
-        @click="changePage(pageNumber)"
+        @click="setChangePage(pageNumber)"
       >
         {{ pageNumber }}
       </div>
@@ -68,6 +88,7 @@ import PostForm from '../components/PostForm.vue';
 import axios from 'axios';
 import Likes from '../components/Likes.vue';
 import MyButton from '../components/ui/MyButton.vue';
+import {mapState, mapGetters, mapActions, mapMutations} from 'vuex';
 
 export default {
   name: 'PostsPageWithStore',
@@ -76,13 +97,9 @@ export default {
   emits: [],
   data() {
     return {
-      posts: [
-        /* {id: 1, title: 'title 1', body: 'Description 1'},
-        {id: 2, title: 'title 2', body: 'Description 2'},
-        {id: 3, title: 'title 3', body: 'Description 3'},
-        {id: 4, title: 'title 4', body: 'Description 4'}, */
-      ],
       dialogVisible: false,
+      /* posts: [],
+      
       isPostsLoading: false,
       selectedSort: '',
       sortOptions: [
@@ -92,11 +109,28 @@ export default {
       searchQuery: '',
       page: 1,
       limit: 10,
-      totalPages: 0,
+      totalPages: 0, */
     };
   },
   computed: {
-    sortedPosts() {
+    ...mapState({
+      posts: (state) => state.post.posts,
+
+      isPostsLoading: (state) => state.post.isPostsLoading,
+      selectedSort: (state) => state.post.selectedSort,
+      sortOptions: (state) => state.post.sortOptions,
+      searchQuery: (state) => state.post.searchQuery,
+      page: (state) => state.post.page,
+      limit: (state) => state.post.limit,
+      totalPages: (state) => state.post.totalPages,
+    }),
+
+    ...mapGetters({
+      sortedPosts: 'post/sortedPosts',
+      sortedAndSearchedPosts: 'post/sortedAndSearchedPosts',
+    }),
+
+    /* sortedPosts() {
       return [...this.posts].sort((post1, post2) => {
         return post1[this.selectedSort]?.localeCompare(
           post2[this.selectedSort]
@@ -110,7 +144,7 @@ export default {
           post.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           post.body.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
-    },
+    }, */
   },
   watch: {
     /* selectedSort(newValue) {
@@ -129,6 +163,20 @@ export default {
     this.fetchPosts();
   },
   methods: {
+    ...mapMutations({
+      setPosts: 'post/setPosts',
+      setLoading: 'post/setLoading',
+      setPage: 'post/setPage',
+      setSelectedSort: 'post/setSelectedSort',
+      setTotalPages: 'post/setTotalPages',
+      setSearchQuery: 'post/setSearchQuery',
+      setChangePage: 'post/setChangePage',
+    }),
+
+    ...mapActions({
+      fetchPosts: 'post/fetchPosts',
+    }),
+
     createPost(post) {
       this.posts.reverse();
       this.posts.push(post);
@@ -166,7 +214,7 @@ export default {
       }
     }, */
 
-    async fetchPosts() {
+    /* async fetchPosts() {
       try {
         this.isPostsLoading = true;
         const response = await axios.get(
@@ -188,12 +236,12 @@ export default {
       } finally {
         this.isPostsLoading = false;
       }
-    },
+    }, */
 
-    changePage(pageNumber) {
+    /* changePage(pageNumber) {
       this.page = pageNumber;
-      /* this.fetchPosts(); */
-    },
+      // this.fetchPosts();
+    }, */
 
     funcObserve() {
       console.log('funcObserve сработал');
